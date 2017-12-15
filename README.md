@@ -1,8 +1,8 @@
 # ISA - Network Applications and Network Administration assignment
 Parallel ping tool using BSD sockets. Created as a university assignment. Not recommended to use as an inspiration (for anything).
 
-# Platform
-Linux 32/64 bit.
+# Platform and language
+Linux 32/64 bit. Implemented using C language.
 
 # Compilation
 Use "make all" with the attached Makefile. GCC required.
