@@ -1,0 +1,73 @@
+.TH TESTOVAC 1
+.SH NAME
+testovac \- tests a number of hosts for packet RTT's and packet loss
+.SH SYNOPSIS
+.B testovac
+[\fB\-h\fR\]
+[\fB\-u\fR\]
+[\fB\-t\fR\fI <interval>\fR]
+[\fB\-i\fR\fI <interval>\fR]
+[\fB\-p\fR\fI <port>\fR]
+[\fB\-l\fR\fI <port>\fR]
+[\fB\-s\fR\fI <size>\fR]
+[\fB\-r\fR\fI <value>\fR]
+[\fB\-w\fR\fI <timeout>\fR]
+[\fB\-v\fR\]
+<\fInode1\fR> <\fInode2\fR> <\fInode3\fR> ...
+
+.SH DESCRIPTION
+The basic purpose of \fBtestovac\fR is to test a number of chosen hosts in the network by sending echo packets and waiting for the replies from the hosts. It also allows to listen on the desired UDP port for UDP communication, and send UDP packets to the host instead of ICMP packets. Every -t seconds it provides packet loss statistics, and every hour it prints statistics about the average and mdev RTT's of each host.
+.SH OPTIONS
+.TP
+.BR \-h
+Displays help.
+.TP
+.BR \-u
+Use UDP protocol to send packets.
+.TP
+.BR \-t " " interval=\fISECONDS\fR
+Interval after which the packet loss statistic is displayed, default 300.
+.TP
+.BR \-i " " interval=\fIMILLISECONDS\fR
+Wait \fIinterval\fR milliseconds to send next packet, default 100.
+.TP
+.BR \-p " " port=\fIPORT\fR
+Used with -u, sets the port to send UDP packets to.
+.TP
+.BR \-l " " port=\fIPORT\fR
+Program will listen on this port and reply on incoming UDP messages.
+.TP
+.BR \-s " " size=\fIBYTES\fR
+Size of packet data, ICMP default is 56 bytes, UDP default is 64 bytes.
+.TP
+.BR \-r " " value=\fIMILLISECONDS\fR
+RTT treshold. Packets over the treshold are reported if -r is set.
+.TP
+.BR \-w " " timeout=\fISECONDS\fR
+Sets  the timeout for the first packet, after that it's 2xRTT.
+.TP
+.BR \-v
+Verbose mode, displays received packets (similar to ping).
+.TP
+.BR \<node>
+IPv4 / IPv6 / hostname of the target.
+Multiple targets must be separated by whitespace.
+
+.SH BUGS
+.br
+\fBLIMITATION: Packet Size\fR
+.br
+The variable data size that can be set up by -s is set to a maximum of MTU which is 1500 bytes over Ethernet. That includes all the headers, so the maximum effective size of the data that can be sent is 1456 bytes using IPv4 and 1436 bytes using IPv6. If the user sets the data to be larger, it will be adjusted appropriately according to description above.
+.br
+\fBBUG: Exiting The Program\fR
+.br
+The application will terminate when CTRL+C is pressed, but sometimes, when testing a large number of hosts, the parent and child processes don't terminate in the right order. In that case, CTRL+C must be pressed again.
+.br
+\fBBUG: UDP Packets\fR
+.br
+If -u and -p is set by the user and the host is not responding to UDP packets sending UDP packets back, the application might send an excessive amount of packets to that port in a short amount of time. 
+.SH FILES
+socket.h, socket.c, memops.h, memops.c, 
+testovac.h, testovac.c, argparse.h, argparse.c, 
+icmp.h, icmp.c, udp.h, udp.c, 
+utils.h, utils.c
