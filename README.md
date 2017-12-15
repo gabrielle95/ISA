@@ -1,18 +1,18 @@
 # ISA - Network Applications and Network Administration assignment
 Parallel ping tool using BSD sockets. Created as a university assignment. Not recommended to use as an inspiration (for anything).
 
-#Platform
+# Platform
 Linux 32/64 bit.
 
-#Compilation
+# Compilation
 Use "make all" with the attached Makefile. GCC required.
 For more information, please read manual.pdf.
 Use "man -l testovac.1" to read the manual page.
 
-#Description
+# Description
 The basic purpose of "testovac" is to test a number of chosen hosts in the network by sending echo packets and waiting for the replies from the hosts. It also allows to listen on the desired UDP port for UDP communication, and send UDP packets to the host instead of ICMP packets. Every -t seconds it provides packet loss statistics (default 300s), and every hour it prints statistics about the average and mdev RTT's of each host. Use ctrl-c to exit the application in the shell. It will print out all the statistics just before termination. For related bugs, please see manual.pdf or the man page.
 
-#Examples of execution
+# Examples of execution
 
 ./testovac -i 1000 -r 20 -v www.google.com www.facebook.com www.yahoo.com
 
