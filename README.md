@@ -16,11 +16,11 @@ The basic purpose of "testovac" is to test a number of chosen hosts in the netwo
 
 ./testovac -i 1000 -r 20 -v www.google.com www.facebook.com www.yahoo.com
 
-Will test Google, Facebook and Yahoo, pinging them every 1000ms (1s). Verbose flag -v assures the printout of received echo reply packets. Packets with RTT greater than 20ms will be reported in the statistics report every 300s or until termination of the application.
+ONLY WORKS AS ROOT. Using raw sockets. Will test Google, Facebook and Yahoo, pinging them every 1000ms (1s). Verbose flag -v assures the printout of received echo reply packets. Packets with RTT greater than 20ms will be reported in the statistics report every 300s or until termination of the application.
 
 ./testovac -u -p 8000 -v www.google.com localhost
 
-Will send UDP packets to Google and to yourself filled with random data. Port 8000 is chosen in this exapmle.
+UDP works without root priviledges. Will send UDP packets to Google and to yourself filled with random data. Port 8000 is chosen in this exapmle.
 
 ./testovac -l 8000
 
